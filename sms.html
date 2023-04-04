@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+    <meta charset=UTF-8>
+    <meta name="viewport" content= "width=device-width, user-scalable=yes">
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+		div.msg{
+			width:fit-content;
+			max-width: 350px;
+			min-width:150px;
+			
+
+			background: #eaeaea;
+			border-radius: 5px;
+			border: solid 2px black;
+			box-shadow: grey 5px 5px 5px;
+			margin-top:10px;
+			padding:5px;
+			overflow-wrap:break-word;
+		}
+
+		#container{
+			margin-top:35px;
+			margin-left:35px;
+		}
+
+		temps{
+			background: white;
+			font-size:.65em;
+			font-style:italic;
+			float:right;
+			margin-bottom:15px;
+			/*display: block;*/
+		}
+
+		@media only screen and (max-width: 480px){ 
+    #container { 
+    margin: auto;
+    }
+}
+
+	</style>
+</head>
+
+<div id="container"></div>
+
+<body>
+
+<script >
+tab = Array();
+
+i=0
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+  	Object.keys(data).reverse().forEach(function(k){
+    console.log(k + ' - ' + data[k].message,data[k].time,data[k].number);
+    _ = data[k];
+
+ if(i<=9){
+ 	    timer = '<br><temps>'+_.time+'</temps>';
+    content = document.getElementById("container");
+    content.innerHTML += '<div class="msg">'+data[k].message+timer+'</div>\n';
+    i++;
+ }
+
+});
+  });
+
+
+
+
+
+</script>
+</body>
+</html>
